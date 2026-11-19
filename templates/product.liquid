@@ -1,0 +1,271 @@
+{%- comment -%}
+  SHOPIFY PAGE MAPPING: templates/product.liquid -> PRODUCT PAGE
+  Matches the base44 TallowCraft product page. Buy box posts to Shopify /cart/add; the
+  Solo/Duo/Trio tiers map to the product's variants when present, else to the first variant.
+{%- endcomment -%}
+{%- assign cv = product.selected_or_first_available_variant -%}
+{%- assign v1 = product.variants[0] -%}
+{%- assign v2 = product.variants[1] | default: product.variants[0] -%}
+{%- assign v3 = product.variants[2] | default: product.variants[0] -%}
+
+<div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ product.title | default: 'Vallore Tallow Balm' }}</div>
+
+<section class="pdp" id="buy">
+  <!-- GALLERY -->
+  <div class="gal">
+    <div class="gal__main">{%- if product.featured_image -%}<img id="galMain" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title }}">{%- else -%}VALLORE™{%- endif -%}</div>
+    {%- if product.images.size > 1 -%}
+    <div class="gal__thumbs">
+      {%- for image in product.images limit: 5 -%}
+        <button class="gal__t" onclick="document.getElementById('galMain').src='{{ image | image_url: width: 900 }}'"><img src="{{ image | image_url: width: 180 }}" alt=""></button>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+
+  <!-- BUY COLUMN -->
+  <div class="buy">
+    <span class="eyebrow">Beef Tallow · For Men</span>
+    <h1>{{ product.title | default: 'Vallore Tallow Balm' }}</h1>
+    <div class="rr"><span class="stars">★★★★★</span><b>4.8</b><span class="muted">· 2,140 reviews</span></div>
+    <div class="buy__price"><span class="price-now" id="buyPrice">{{ cv.price | money }}</span>{% if cv.compare_at_price > cv.price %}<span class="price-was">{{ cv.compare_at_price | money }}</span>{% endif %}<span class="badge">60% OFF</span></div>
+
+    <ul class="blist">
+      <li><span class="ck">✓</span>Stop looking tired in every photo she takes</li>
+      <li><span class="ck">✓</span>Shave without the burn and tight, flaky skin after</li>
+      <li><span class="ck">✓</span>One jar replaces the moisturizer, aftershave and eye cream</li>
+      <li><span class="ck">✓</span>A 10-second habit your son will copy one day</li>
+    </ul>
+
+    <div class="urg"><b>● Only 14 units left at this price</b><p>Selling fast — 253 orders in the last 48 hours</p></div>
+
+    <form action="/cart/add" method="post" id="pdpForm">
+      <input type="hidden" name="id" id="pdpVariantId" value="{{ cv.id }}">
+      <p class="supply__lbl">Choose your supply:</p>
+
+      <label class="tier{% unless v2.id != v1.id %} sel{% endunless %}" data-tier data-variant="{{ v1.id }}" data-price="$34.00">
+        <input type="radio" name="tier" value="{{ v1.id }}">
+        <div class="tier__row">
+          <div><span class="tier__name">The Solo</span><div class="tier__sub">1 jar · 30-day supply</div></div>
+          <div><span class="price-was" style="font-size:.9rem">$49</span> <span class="tier__pr">$34</span></div>
+        </div>
+      </label>
+
+      <label class="tier sel" data-tier data-variant="{{ v2.id }}" data-price="$49.99">
+        <div class="tier__top"><span class="tier__bf">Black Friday · 50% Off</span><span class="tier__pop">Most Popular</span></div>
+        <input type="radio" name="tier" value="{{ v2.id }}" checked>
+        <div class="tier__row">
+          <div><span class="tier__name">The Duo</span><div class="tier__sub">2 jars · <span class="tier__save">Save $48</span></div><span class="tier__ship">✓ Free Shipping</span></div>
+          <div><span class="price-was" style="font-size:.9rem">$98</span> <span class="tier__pr">$49.99</span></div>
+        </div>
+      </label>
+
+      <label class="tier" data-tier data-variant="{{ v3.id }}" data-price="$59.99">
+        <div class="tier__top"><span class="tier__bf">Black Friday · 50% Off</span></div>
+        <input type="radio" name="tier" value="{{ v3.id }}">
+        <div class="tier__row">
+          <div><span class="tier__name">The Trio</span><div class="tier__sub">3 jars · <span class="tier__save">Save $87</span></div><span class="tier__ship">✓ Free Shipping</span></div>
+          <div><span class="price-was" style="font-size:.9rem">$147</span> <span class="tier__pr">$59.99</span></div>
+        </div>
+      </label>
+
+      <div class="subrow"><span>Subscribe &amp; save 15%: zero commitment, cancel anytime</span><span class="subrow__t"></span></div>
+      <div class="subfreq"><span><b>1 bundle</b> · every 30 days</span><span><b>2 bundles</b> · every 60 days</span><span><b>3 bundles</b> · every 90 days</span></div>
+
+      <button type="submit" name="add" class="btn btn-cta btn-lg btn-full atc" id="pdpAtc">🛒 Add to cart — <span id="atcPrice">{{ cv.price | money }}</span></button>
+    </form>
+
+    <div class="urgline">⏱ Early Black Friday — 40% off while it lasts</div>
+    <div class="pline">● Orders processed in 24–48 hrs · Free shipping on orders over $45</div>
+
+    <div class="tcards">
+      <div class="tcard"><div class="ti">🛡</div><b>60-Day Promise</b></div>
+      <div class="tcard"><div class="ti">🚚</div><b>Free Shipping Over $45</b></div>
+      <div class="tcard"><div class="ti">🔒</div><b>Secure Checkout</b></div>
+    </div>
+    <div class="pay"><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>PAYPAL</span></div>
+
+    <div style="margin-top:20px">
+      <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>How does beef tallow balm work?<span class="pm">+</span></button><div class="acc__a"><p>Grass-fed tallow is about 87% a match for the oil your own skin makes, so it absorbs instead of sitting on top. Honey and jojoba calm and balance; vitamin E protects.</p></div></div>
+      <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Made for a man's skin<span class="pm">+</span></button><div class="acc__a"><p>Thicker, oilier, shaved daily. Vallore is built for exactly that — it handles razor burn and dryness without any fuss or fragrance.</p></div></div>
+      <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>How to use it<span class="pm">+</span></button><div class="acc__a"><p>Warm a pea-sized amount between your fingers and press into clean face and neck. Morning and night. Ten seconds, done.</p></div></div>
+      <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>60-day money-back promise<span class="pm">+</span></button><div class="acc__a"><p>Use the whole jar. If your skin doesn't look better in 60 days, email us for a full refund — jar empty or not.</p></div></div>
+      <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Shipping time<span class="pm">+</span></button><div class="acc__a"><p>Orders are processed in 24–48 hours. Free shipping on orders over $45.</p></div></div>
+    </div>
+
+    <div class="quotebox"><div class="qav">DR</div><div><p><b>41, work outside, hands were shot.</b> Three weeks in and the cracked knuckles finally closed up. I'm not a skincare guy — but this I'll actually do.</p><div class="qm">Devon R. · ★★★★★ Verified buyer</div></div></div>
+  </div>
+</section>
+
+<!-- strip -->
+<div class="strip"><div class="strip__in">
+  <div><div class="si">🚚</div><b>Free shipping over $45</b></div>
+  <div><div class="si">🛡</div><b>60-day promise</b></div>
+  <div><div class="si">🌿</div><b>Grass-fed</b></div>
+  <div><div class="si">👤</div><b>Made for men</b></div>
+</div></div>
+
+<!-- REAL RESULTS -->
+<section class="section">
+  <div class="wrap tc">
+    <span class="eyebrow">Real Results</span>
+    <h2 class="h2-serif" style="margin-top:10px">Finally, something men actually stick with.</h2>
+    <div class="ba">
+      <div class="ba__c">
+        <div class="ba__imgs"><div class="ba__im"><span>BEFORE</span></div><div class="ba__im"><span>AFTER</span></div></div>
+        <h3>Tired, lined skin</h3>
+        <div class="ba__who"><b>James T.</b><span class="ba__vb">✓ Verified buyer</span></div>
+        <ul class="ba__list"><li><span class="ck">✓</span>Softens the look of forehead lines</li><li><span class="ck">✓</span>Skin looks rested, not worn out</li><li><span class="ck">✓</span>Sinks in, never feels like product</li></ul>
+        <p class="ba__q">"Tried every lotion my wife had. Nothing stuck. Two weeks on this and she asked what I changed."</p>
+      </div>
+      <div class="ba__c">
+        <div class="ba__imgs"><div class="ba__im"><span>BEFORE</span></div><div class="ba__im"><span>AFTER</span></div></div>
+        <h3>Razor burn &amp; dry flakes</h3>
+        <div class="ba__who"><b>Mike R.</b><span class="ba__vb">✓ Verified buyer</span></div>
+        <ul class="ba__list"><li><span class="ck">✓</span>Calms redness after shaving</li><li><span class="ck">✓</span>Stops flakes in the beard line</li><li><span class="ck">✓</span>Comfortable all day, no tightness</li></ul>
+        <p class="ba__q">"My jaw used to burn every morning after shaving. Now it just feels normal. Didn't think that was possible."</p>
+      </div>
+      <div class="ba__c">
+        <div class="ba__imgs"><div class="ba__im"><span>BEFORE</span></div><div class="ba__im"><span>AFTER</span></div></div>
+        <h3>Puffy, tired eyes</h3>
+        <div class="ba__who"><b>David C.</b><span class="ba__vb">✓ Verified buyer</span></div>
+        <ul class="ba__list"><li><span class="ck">✓</span>Under-eyes look less puffy</li><li><span class="ck">✓</span>You look alert and well-rested</li><li><span class="ck">✓</span>Results or your money back</li></ul>
+        <p class="ba__q">"I always looked like I pulled an all-nighter. People stopped asking if I'm tired. That's enough for me."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT WORKS -->
+<section class="section section--alt">
+  <div class="wrap tc"><span class="eyebrow">Why It Works</span><h2 class="h2-serif" style="margin-top:10px">Your skin runs on fat, not water.</h2></div>
+  <div class="wrap"><div class="two" style="margin-top:34px">
+    <div class="two__img">{%- if product.images[1] -%}<img src="{{ product.images[1] | image_url: width: 700 }}" alt="Vallore">{%- elsif product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 700 }}" alt="Vallore">{%- else -%}<span>VALLORE™</span>{%- endif -%}</div>
+    <div>
+      <div class="ing"><span class="ii">💧</span><div><h4>It sinks in, it doesn't sit on top</h4><p>Grass-fed tallow is ~87% a match for the oil your skin already makes, so your skin recognizes it and lets it in.</p></div></div>
+      <div class="ing"><span class="ii">✓</span><div><h4>Four ingredients, nothing synthetic</h4><p>Tallow plus a couple of simple oils. No water filler, no fragrance you can't pronounce, no 40-item label.</p></div></div>
+      <div class="ing"><span class="ii">⏱</span><div><h4>Ten seconds, then you're out the door</h4><p>Not greasy, no shine, no beefy smell, no routine. Warm a dab, press it in, grab your keys. That's it.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="section">
+  <div class="wrap tc">
+    <span class="eyebrow">How To Use It</span>
+    <h2 class="h2-serif" style="margin-top:10px">Better-looking skin in 4 easy steps.</h2>
+    <p class="lead">Ten seconds, twice a day. No routine to learn.</p>
+    <div class="steps">
+      <div class="step"><span class="step__n">Step 1</span><h3>Wash</h3><p>Rinse your face with whatever cleanser you already use. Pat dry.</p></div>
+      <div class="step"><span class="step__n">Step 2</span><h3>Warm</h3><p>Scoop a pea-sized amount and rub it between your fingertips for a few seconds.</p></div>
+      <div class="step"><span class="step__n">Step 3</span><h3>Press in</h3><p>Apply to face and neck, focusing on dry spots, around the eyes and your shave zone.</p></div>
+      <div class="step"><span class="step__n">Step 4</span><h3>Done</h3><p>It melts in matte with no greasy residue. Use it morning and night for best results.</p></div>
+    </div>
+    <div class="steptags"><span class="steptag">☀ Every morning</span><span class="steptag">☾ Again before bed</span></div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section section--alt">
+  <div class="wrap tc">
+    <span class="eyebrow">The Honest Comparison</span>
+    <h2 class="h2-serif" style="margin-top:10px">Why not just keep doing nothing?</h2>
+    <table class="ctbl">
+      <thead><tr><th></th><th>Drugstore Lotion</th><th>10-Step Routine</th><th>Vallore</th></tr></thead>
+      <tbody>
+        <tr><td>Takes under 10 sec</td><td class="yes">✓</td><td class="no">✕</td><td class="yes">✓</td></tr>
+        <tr><td>Actually sinks in</td><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        <tr><td>You'll keep it up</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td></tr>
+        <tr><td>Nothing synthetic</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td></tr>
+        <tr><td>Feels like it's yours</td><td class="no">✕</td><td class="no">✕</td><td class="yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ANGLE STORIES -->
+<div class="angle">
+  <div class="angle__img">The Stool By The Sink</div>
+  <span class="eyebrow">The Stool By The Sink</span>
+  <h2>You used to be that kid.</h2>
+  <p>You used to stand on a stool and watch your dad get ready — the soap, the splash of water, the way he carried himself out the door. Now there's a stool next to <strong>your</strong> sink, and someone small is standing on it, watching you.</p>
+  <p class="angle__pull">One morning they'll catch themselves and realize they became the man they looked up to. Give them something worth copying.</p>
+</div>
+<div class="angle__div"></div>
+<div class="angle">
+  <div class="angle__img">Behind The Camera</div>
+  <span class="eyebrow">Behind The Camera</span>
+  <h2>You're always the one taking the picture.</h2>
+  <p>You're the guy who grabs everyone's phone so the shot comes out right. Years of birthdays, trips and ordinary Sundays — and you're in almost none of them.</p>
+  <p>Some of that is being the dependable one. Some of it is not loving how you've looked lately. <strong>Ten seconds a day handles the second part — so you stop staying behind the camera.</strong></p>
+</div>
+<div class="angle__div"></div>
+<div class="angle">
+  <div class="angle__img">Her Shelf. Your One Jar.</div>
+  <span class="eyebrow">The Morning Routine</span>
+  <h2>Her shelf. Your one jar.</h2>
+  <p>Your wife has a whole shelf — cleanser, serum, eye cream, the works. You looked at all those bottles and thought, "yeah, I'm never doing that," and walked out the door with dry skin instead.</p>
+  <p><strong>One jar by the sink. Ten seconds. Done before she can ask "you're done already?"</strong> A routine you'll actually keep, because it isn't one.</p>
+</div>
+
+<!-- REVIEWS 2 -->
+<section class="section section--alt">
+  <div class="wrap tc">
+    <div class="rr" style="justify-content:center"><span class="stars">★★★★★</span><span class="muted">4.8 / 5</span></div>
+    <h2 class="h2-serif" style="margin-top:10px">2,140 dads stopped looking so tired.</h2>
+  </div>
+  <div class="revs">
+    <div class="rev"><div class="rev__h"><div class="rev__av">MT</div><div><div class="rev__n">Marcus T.</div><div class="rev__m">Austin, TX · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>My daughter asked why I "do the jar." Told her it's so I take care of myself like I take care of her. Face looks less wrecked too.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">DR</div><div><div class="rev__n">Devon R.</div><div class="rev__m">Denver, CO · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>41, work outside, hands were shot. Three weeks in and the cracked knuckles finally closed up. I'm not a skincare guy — but this I'll actually do.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">JL</div><div><div class="rev__n">James L.</div><div class="rev__m">Columbus, OH · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>Wife has a whole shelf. I've got one jar. And honestly mine's easier to keep up with than her ten bottles. Zero smell, not greasy. Sold.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">RC</div><div><div class="rev__n">Rob C.</div><div class="rev__m">Sacramento, CA · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>The one thing in my day that's mine. Ten seconds, nobody needs anything from me. Looking less rough by Friday is the bonus.</p></div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="section">
+  <div class="gbox">
+    <div class="gbox__b">60<small>DAYS</small></div>
+    <h3>Give it two weeks. Keep the jar either way.</h3>
+    <p>Use it daily for 60 days. If you don't look less tired, email us for every cent back — and keep the jar. The risk is ours.</p>
+  </div>
+</section>
+
+<!-- strip 2 -->
+<div class="strip"><div class="strip__in">
+  <div><div class="si">🛡</div><b>60-day promise</b></div>
+  <div><div class="si">🚚</div><b>Free shipping over $45</b></div>
+  <div><div class="si">🔒</div><b>Secure checkout</b></div>
+  <div><div class="si">💬</div><b>24/7 support</b></div>
+</div></div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap tc"><span class="eyebrow">Straight Answers</span><h2 class="h2-serif" style="margin-top:10px">The stuff you're thinking.</h2></div>
+  <div class="wrap" style="max-width:760px;margin-top:24px">
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>"I'm not a skincare guy."<span class="pm">+</span></button><div class="acc__a"><p>Perfect — neither are most of our customers. One jar, ten seconds, no steps to learn. If a routine has more than one move, you won't keep it. This one you will.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Beef fat on my face? Really?<span class="pm">+</span></button><div class="acc__a"><p>Tallow is closer to your skin's own oils than almost anything in a bottle. It's whipped light, absorbs fast, and leaves zero beefy smell.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Is it greasy? Does it smell?<span class="pm">+</span></button><div class="acc__a"><p>No and no. It melts in matte within 30 seconds, and the unscented jar has a faint natural note that's gone in a minute.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>How long does one jar last?<span class="pm">+</span></button><div class="acc__a"><p>About a month with daily use — you only need a pea-sized amount. The Duo and Trio bundles lock in the lower price and free shipping.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>When will I notice a difference?<span class="pm">+</span></button><div class="acc__a"><p>Most guys feel less tight and dry within a few days. The "you look rested" comments tend to land around the three-to-four-week mark.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Can I use it around my eyes and on my neck?<span class="pm">+</span></button><div class="acc__a"><p>Yes. It's gentle enough for under-eyes and great on the neck and shave zone — exactly where men get dry and irritated.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>Can I keep using my face wash and other products?<span class="pm">+</span></button><div class="acc__a"><p>Absolutely. Wash as usual, then press Vallore in last. It replaces moisturizer, aftershave and eye cream, but it plays nice with everything.</p></div></div>
+    <div class="acc__i" data-faq><button type="button" class="acc__q" data-faq-trig>What's your refund policy?<span class="pm">+</span></button><div class="acc__a"><p>60-day money-back promise. Use the whole jar — if you're not impressed, email us for a full refund and keep the jar.</p></div></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section--alt tc">
+  <div class="wrap">
+    <h2 class="h2-serif">Ten seconds. Starting tonight.</h2>
+    <p class="muted" style="margin-top:8px">Be the man they grow up copying — before "later" turns into another year.</p>
+    <a href="#buy" class="btn btn-cta btn-lg" style="margin-top:22px">Claim your jar — 40% off</a>
+    <p class="hero__ship">60-day money-back promise · free shipping over $45 · <b style="color:var(--rust)">DAD15</b> at checkout</p>
+  </div>
+</section>
+
+<!-- STICKY ATC -->
+<div class="satc" id="stickyAtc">
+  <span class="satc__p"><span class="price-now">$34</span> <span class="price-was">$49</span></span>
+  <a href="#buy" class="btn btn-cta">Choose your supply →</a>
+</div>

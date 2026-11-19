@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/gift_card.liquid -> GIFT CARD PAGE {%- endcomment -%}
+<html lang="{{ request.locale.iso_code }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ shop.name }} Gift Card</title>{{ content_for_header }}
+<style>body{font-family:system-ui,sans-serif;background:#F4ECDF;color:#20140C;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.gc{background:#fff;border-radius:18px;padding:40px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.1);max-width:360px}.gc h1{font-size:1.3rem;margin:0 0 6px}.gc .v{font-size:2.6rem;color:#C2863F;margin:14px 0}.gc .code{background:#FBF4E8;border:1px dashed #C2863F;border-radius:10px;padding:12px;font-family:monospace;letter-spacing:2px;margin:14px 0}</style></head>
+<body><div class="gc"><h1>{{ shop.name }}</h1><p>Gift Card</p><div class="v">{{ gift_card.initial_value | money }}</div><div class="code">{{ gift_card.code | format_code }}</div><a href="{{ shop.url }}" style="color:#C2863F;font-weight:600">Use it on a jar →</a></div></body></html>

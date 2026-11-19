@@ -1,0 +1,18 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Vallore — TallowCraft",
+    "theme_version": "2.0.0",
+    "theme_author": "Vallore",
+    "theme_documentation_url": "https://tallow-craft-labs.base44.app",
+    "theme_support_url": "https://tallow-craft-labs.base44.app"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "announcement_text", "label": "Announcement bar text", "default": "40% OFF · FREE SHIPPING OVER $45 · EARLY BLACK FRIDAY" },
+      { "type": "text", "id": "logo_text", "label": "Logo text", "default": "VALLORE" },
+      { "type": "text", "id": "product_handle", "label": "Main product handle", "default": "face-ritual-tallow-balm" }
+    ]
+  }
+]

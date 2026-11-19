@@ -1,0 +1,2 @@
+{%- comment -%} SHOPIFY SNIPPET: snippets/price.liquid -> reusable price with compare-at. Usage: {% render 'price', price: product.price, compare: product.compare_at_price %} {%- endcomment -%}
+<span class="price">{{ price | money }}{% if compare and compare > price %} <span class="price-compare">{{ compare | money }}</span>{% endif %}</span>

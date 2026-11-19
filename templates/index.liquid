@@ -1,0 +1,118 @@
+{%- comment -%}
+  SHOPIFY PAGE MAPPING: templates/index.liquid -> HOME PAGE
+  Matches the base44 TallowCraft homepage: 3-col hero · agitation · solution · reviews ·
+  "Built Around Your Skin" (2-col ingredients) · "Zero Risk" closer.
+{%- endcomment -%}
+{%- assign ph = settings.product_handle | default: 'vallore-beef-tallow' -%}
+{%- assign feat = all_products[ph] -%}
+{%- assign purl = '/products/' | append: ph -%}
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <span class="pill">Beef Tallow · For Men</span>
+      <h1>One jar. Ten seconds. Skin that looks rested.</h1>
+      <p class="hero__it">No routine. No shine. No sting.</p>
+      <div class="rr"><span class="stars">★★★★★</span><b>4.8</b><span class="muted">· 2,140+ reviews</span></div>
+    </div>
+    <div class="hero__img">
+      {%- if feat.featured_image -%}<img src="{{ feat.featured_image | image_url: width: 800 }}" alt="{{ feat.title }}">{%- else -%}<span>VALLORE™</span>{%- endif -%}
+    </div>
+    <div class="hero__details">
+      <p class="hero__desc">Vallore™ is whipped grass-fed beef tallow made for men. Rub a little in after you wash — it sinks in fast, calms razor burn and keeps you comfortable all day.</p>
+      <div class="hero__b">
+        <div><span class="d">✓</span> 60-Day Guarantee</div>
+        <div><span class="d">✓</span> Free Shipping Over $45</div>
+        <div><span class="d">✓</span> 4 Real Ingredients</div>
+      </div>
+      <div class="hero__price"><span class="price-now">$34.00</span><span class="price-was">$49.00</span><span class="badge">40% OFF</span></div>
+      <p class="hero__ship">✦ Ships in 24–48 hrs · Early Black Friday pricing</p>
+    </div>
+  </div>
+  <div class="hero__cta"><a href="{{ purl }}" class="btn btn-gold btn-lg">Shop Now →</a></div>
+</section>
+
+<!-- ===== AGITATION ===== -->
+<section class="section section--alt">
+  <div class="wrap tc">
+    <span class="eyebrow">Sound Familiar?</span>
+    <h2 class="h2" style="margin-top:10px">Looking Tired Isn't Your Fault</h2>
+    <p class="lead">Nobody ever handed you something simple enough to keep up with. If any of these hit home — you're not alone.</p>
+    <div class="cards cards-3">
+      <div class="card" style="text-align:left"><div class="card__ic">🪞</div><h3>The 6am mirror</h3><p>You feel like yourself in your head — then you catch your reflection and some tired, worn-down guy is staring back.</p></div>
+      <div class="card" style="text-align:left"><div class="card__ic">⏳</div><h3>Last on your own list</h3><p>Kids, job, house, dog. Nothing in the day is actually yours, and you quietly stopped expecting it to be.</p></div>
+      <div class="card" style="text-align:left"><div class="card__ic">🧴</div><h3>The gray-bottle lie</h3><p>Drugstore "men's" lotion felt like a rental car and did nothing. So you figured this was just how a man's skin ends up.</p></div>
+    </div>
+    <div class="notebox">Vallore™ gives your skin the fat it's actually missing — <b>one jar, ten seconds, done.</b></div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="section">
+  <div class="wrap tc">
+    <span class="eyebrow">The Solution</span>
+    <h2 class="h2-serif" style="margin-top:10px">Meet Vallore™</h2>
+    <p class="lead">Whipped grass-fed beef tallow that's ~87% a match for the oil your skin already makes. No water filler, no synthetic fragrance, no 40-item label.</p>
+    <div class="cards cards-4">
+      <div class="feat"><span class="fi">👁</span><div><h3>Looks Rested — Not Shiny</h3><p>Sinks in fast with no greasy film, so you look awake in every photo instead of oily.</p></div></div>
+      <div class="feat"><span class="fi">🪒</span><div><h3>Shave Without the Sting</h3><p>Calms razor burn and the tight, flaky feeling after you shave. Comfortable all day.</p></div></div>
+      <div class="feat"><span class="fi">🫙</span><div><h3>Replaces Five Products</h3><p>Moisturizer, aftershave, eye cream, lip balm and hand cream. One jar on the counter.</p></div></div>
+      <div class="feat"><span class="fi">⏱</span><div><h3>A Ten-Second Habit</h3><p>Warm a dab, press it in, grab your keys. A routine simple enough to actually keep.</p></div></div>
+    </div>
+    <div class="socProof"><span>♡ 2,140+ Verified Buyers</span><span>★ 4.8/5 Average Rating</span></div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="section section--alt" id="reviews">
+  <div class="wrap tc">
+    <span class="eyebrow">Verified Reviews</span>
+    <h2 class="h2-serif" style="margin-top:10px">2,140 Men Who Finally Kept a Routine</h2>
+    <div class="rr" style="justify-content:center;margin-top:10px"><span class="stars">★★★★★</span><b>4.8/5</b><span class="muted">· Verified Buyers</span></div>
+  </div>
+  <div class="revs">
+    <div class="rev"><div class="rev__h"><div class="rev__av">MT</div><div><div class="rev__n">Marcus T.</div><div class="rev__m">Austin, TX · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>My daughter asked why I "do the jar." Told her it's so I take care of myself like I take care of her. Face looks less wrecked too.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">DR</div><div><div class="rev__n">Devon R.</div><div class="rev__m">Denver, CO · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>41, work outside, hands were shot. Three weeks in and the cracked knuckles finally closed up. I'm not a skincare guy — but this I'll actually do.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">JL</div><div><div class="rev__n">James L.</div><div class="rev__m">Columbus, OH · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>Wife has a whole shelf. I've got one jar. And honestly mine's easier to keep up with than her ten bottles. Zero smell, not greasy. Sold.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">RC</div><div><div class="rev__n">Rob C.</div><div class="rev__m">Sacramento, CA · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>The one thing in my day that's mine. Ten seconds, nobody needs anything from me. Looking less rough by Friday is the bonus.</p></div>
+    <div class="rev"><div class="rev__h"><div class="rev__av">PK</div><div><div class="rev__n">Paul K.</div><div class="rev__m">Portland, OR · Verified ✓</div></div></div><div class="stars" style="font-size:.8rem">★★★★★</div><p>Bought it for the dad angle. Stayed for the skin. My face doesn't look so tired by Friday anymore.</p></div>
+  </div>
+</section>
+
+<!-- ===== BUILT AROUND YOUR SKIN (ingredients, 2-col) ===== -->
+<section class="section">
+  <div class="wrap">
+    <div class="two">
+      <div class="two__img">{%- if feat.images[1] -%}<img src="{{ feat.images[1] | image_url: width: 700 }}" alt="Vallore ingredients">{%- elsif feat.featured_image -%}<img src="{{ feat.featured_image | image_url: width: 700 }}" alt="Vallore">{%- else -%}<span>VALLORE™</span>{%- endif -%}</div>
+      <div>
+        <span class="eyebrow">What's Inside</span>
+        <h2 class="h2-serif" style="margin:10px 0 6px">Built Around Your Skin</h2>
+        <p class="muted" style="margin-bottom:20px">Short label. Real ingredients. Nothing you can't pronounce.</p>
+        <div class="ing"><span class="ii">🐄</span><div><h4>Grass-Fed Beef Tallow</h4><p>Mirrors your skin's natural oils to rebuild a strong, comfortable barrier.</p></div></div>
+        <div class="ing"><span class="ii">🍯</span><div><h4>Raw Manuka Honey</h4><p>Calms razor bumps and keeps moisture locked in.</p></div></div>
+        <div class="ing"><span class="ii">🌿</span><div><h4>Jojoba Oil</h4><p>Balances oily and dry zones so you never look shiny.</p></div></div>
+        <div class="ing"><span class="ii">✨</span><div><h4>Vitamin E</h4><p>Shields skin from wind, sun and daily stress.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZERO RISK CLOSER ===== -->
+<section class="section section--alt">
+  <div class="wrap finalband">
+    <span class="eyebrow">Zero Risk</span>
+    <h2 class="h2-serif" style="margin:10px 0 8px">Try It Tomorrow Morning — Zero Risk</h2>
+    <p class="muted">One jar. Ten seconds. Skin that looks rested.</p>
+    <p class="muted" style="font-size:.86rem">60-day money-back promise on every order.</p>
+    <div class="hero__price" style="justify-content:center;margin:18px 0"><span class="price-now">$34.00</span><span class="price-was">$49.00</span><span class="badge">40% OFF</span></div>
+    <a href="{{ purl }}" class="btn btn-gold btn-lg">Get Vallore™ — 40% Off Today</a>
+    <p class="hero__ship">✦ Ships in 24–48 hrs · Early Black Friday pricing</p>
+    <div class="trust4">
+      <div><div class="ti">🛡</div><b>60-Day Guarantee</b><span>Love it or your money back</span></div>
+      <div><div class="ti">🚚</div><b>Free Shipping Over $45</b><span>Ships in 24–48 hours</span></div>
+      <div><div class="ti">⏱</div><b>10-Second Routine</b><span>No steps to remember</span></div>
+      <div><div class="ti">🔒</div><b>Secure Checkout</b><span>256-bit SSL encryption</span></div>
+    </div>
+  </div>
+</section>

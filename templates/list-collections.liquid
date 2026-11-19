@@ -1,0 +1,9 @@
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/list-collections.liquid -> COLLECTIONS LIST PAGE {%- endcomment -%}
+<section style="max-width:1200px;margin:0 auto;padding:60px 20px">
+  <h1 class="h2" style="margin-bottom:28px">Collections</h1>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px">
+    {% for collection in collections %}
+      <a href="{{ collection.url }}"><div style="background:var(--bg3);border-radius:14px;aspect-ratio:3/2;overflow:hidden;margin-bottom:10px">{% if collection.featured_image %}<img src="{{ collection.featured_image | image_url: width: 500 }}" alt="{{ collection.title | escape }}">{% endif %}</div><h3 style="font-size:1.05rem">{{ collection.title }}</h3></a>
+    {% endfor %}
+  </div>
+</section>

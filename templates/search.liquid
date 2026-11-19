@@ -1,0 +1,16 @@
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/search.liquid -> SEARCH PAGE {%- endcomment -%}
+<section style="max-width:900px;margin:0 auto;padding:60px 20px">
+  <h1 class="h2" style="margin-bottom:20px">Search</h1>
+  <form action="{{ routes.search_url }}" method="get" style="display:flex;gap:10px;margin-bottom:28px">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search the store…" style="flex:1;padding:12px;border:1px solid var(--line);border-radius:10px">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  {% if search.performed %}
+    {% if search.results_count > 0 %}
+      <p style="opacity:.7;margin-bottom:16px">{{ search.results_count }} result(s) for "{{ search.terms }}"</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px">
+        {% for item in search.results %}<a href="{{ item.url }}"><div style="background:var(--bg3);border-radius:12px;aspect-ratio:1/1;overflow:hidden;margin-bottom:8px">{% if item.featured_image %}<img src="{{ item.featured_image | image_url: width: 400 }}" alt="{{ item.title | escape }}">{% endif %}</div><h3 style="font-size:1rem">{{ item.title }}</h3></a>{% endfor %}
+      </div>
+    {% else %}<p>No results for "{{ search.terms }}". Try another word.</p>{% endif %}
+  {% endif %}
+</section>

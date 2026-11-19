@@ -1,0 +1,11 @@
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/blog.liquid -> BLOG PAGE {%- endcomment -%}
+<section style="max-width:1000px;margin:0 auto;padding:60px 20px">
+  <h1 class="h2" style="margin-bottom:28px">{{ blog.title | default: 'The Journal' }}</h1>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+    {% for article in blog.articles %}
+      <a href="{{ article.url }}"><div style="background:var(--bg3);border-radius:14px;aspect-ratio:3/2;overflow:hidden;margin-bottom:12px">{% if article.image %}<img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}">{% endif %}</div>
+      <h2 style="font-size:1.2rem;margin-bottom:6px">{{ article.title }}</h2>
+      <p style="opacity:.7;font-size:.92rem">{{ article.excerpt_or_content | strip_html | truncatewords: 22 }}</p></a>
+    {% endfor %}
+  </div>
+</section>

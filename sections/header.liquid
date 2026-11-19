@@ -1,0 +1,32 @@
+{%- comment -%} SHOPIFY SECTION: sections/header.liquid -> site header + mobile drawer {%- endcomment -%}
+{%- assign ph = settings.product_handle | default: 'vallore-beef-tallow' -%}
+<header class="site-header">
+  <div class="site-header__in">
+    <button class="navtog" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="{{ routes.root_url }}" class="logo">{{ settings.logo_text | default: 'VALLORE' }}</a>
+    <nav class="nav">
+      <a href="{{ routes.root_url }}"{% if template == 'index' %} class="active"{% endif %}>Home</a>
+      <a href="/products/{{ ph }}"{% if template contains 'product' %} class="active"{% endif %}>Shop</a>
+      <a href="{{ routes.root_url }}#reviews">Reviews</a>
+      <a href="/pages/about">About Us</a>
+    </nav>
+    <div class="hicons">
+      <a href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart" style="position:relative;display:flex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>{% if cart.item_count > 0 %}<span class="cart-ct">{{ cart.item_count }}</span>{% endif %}</a>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="navDrawer">
+  <button class="drawer__x" id="navClose" aria-label="Close">✕</button>
+  <div class="logo" style="color:#f3e9d7">{{ settings.logo_text | default: 'VALLORE' }}</div>
+  <nav class="drawer__links">
+    <a href="{{ routes.root_url }}">Home</a>
+    <a href="/products/{{ ph }}">Shop</a>
+    <a href="{{ routes.root_url }}#reviews">Reviews</a>
+    <a href="/pages/about">About Us</a>
+    <a href="/pages/contact">Contact</a>
+  </nav>
+</div>
+{% schema %}
+{ "name": "Header" }
+{% endschema %}

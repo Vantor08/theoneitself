@@ -1,0 +1,8 @@
+{%- comment -%} SHOPIFY SECTION: sections/announcement-bar.liquid -> scrolling promo marquee {%- endcomment -%}
+<div class="marquee"><div class="marquee__track">
+  {%- assign msg = settings.announcement_text | default: 'EARLY BLACK FRIDAY · 40% OFF · FREE SHIPPING OVER $45' -%}
+  {%- for i in (1..8) -%}<span>{{ msg }}</span>{%- endfor -%}
+</div></div>
+{% schema %}
+{ "name": "Announcement bar" }
+{% endschema %}

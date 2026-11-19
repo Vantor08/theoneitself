@@ -1,0 +1,16 @@
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/page.liquid -> STANDARD PAGE (About, Contact, etc.) {%- endcomment -%}
+<section class="static-page" style="max-width:760px;margin:0 auto;padding:60px 20px">
+  <h1 class="h2" style="margin-bottom:20px">{{ page.title }}</h1>
+  <div class="rte" style="line-height:1.7">{{ page.content }}</div>
+  {%- if page.handle contains 'contact' -%}
+  {% form 'contact' %}
+    {% if form.posted_successfully? %}<p style="color:#2e7d32;margin:16px 0">✓ Thanks — we'll reply to your email shortly.</p>{% endif %}
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:520px;margin-top:20px">
+      <input type="text" name="contact[name]" placeholder="Name" required style="padding:12px;border:1px solid var(--line);border-radius:10px">
+      <input type="email" name="contact[email]" placeholder="Email" required style="padding:12px;border:1px solid var(--line);border-radius:10px">
+      <textarea name="contact[body]" placeholder="Message" rows="5" required style="padding:12px;border:1px solid var(--line);border-radius:10px"></textarea>
+      <button type="submit" class="btn btn-primary btn-lg">Send Message →</button>
+    </div>
+  {% endform %}
+  {%- endif -%}
+</section>

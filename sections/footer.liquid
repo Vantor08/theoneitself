@@ -1,0 +1,24 @@
+{%- comment -%} SHOPIFY SECTION: sections/footer.liquid -> site footer {%- endcomment -%}
+<footer class="foot">
+  <div class="foot__logo">{{ settings.logo_text | default: 'VALLORE' }}</div>
+  <p class="foot__tag">Beef tallow, built for men who don't have time for a routine.</p>
+  <nav class="foot__nav">
+    <a href="/products/{{ settings.product_handle | default: 'vallore-beef-tallow' }}">Shop</a>
+    <a href="/pages/about">Our story</a>
+    <a href="{{ routes.root_url }}#reviews">Reviews</a>
+    <a href="/pages/faq">FAQ</a>
+    <a href="/pages/track-order">Track order</a>
+    <a href="/pages/contact">Contact</a>
+  </nav>
+  <div class="foot__sub">
+    <a href="{{ shop.shipping_policy.url | default: '/policies/shipping-policy' }}">Shipping &amp; Returns</a>
+    <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">Refund policy</a>
+    <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Privacy</a>
+    <a href="{{ shop.terms_of_service.url | default: '/policies/terms-of-service' }}">Terms</a>
+  </div>
+  <div class="foot__pay">VISA · MASTERCARD · AMEX · APPLE PAY · SHOP PAY</div>
+  <div class="foot__legal">These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. © {{ 'now' | date: '%Y' }} {{ shop.name }}.</div>
+</footer>
+{% schema %}
+{ "name": "Footer" }
+{% endschema %}

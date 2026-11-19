@@ -1,0 +1,8 @@
+{%- comment -%} SHOPIFY PAGE MAPPING: templates/article.liquid -> BLOG POST PAGE {%- endcomment -%}
+<article style="max-width:760px;margin:0 auto;padding:60px 20px">
+  <a href="{{ blog.url }}" style="color:var(--gold);font-size:.9rem">← {{ blog.title }}</a>
+  <h1 class="h2" style="margin:14px 0 8px">{{ article.title }}</h1>
+  <p class="count" style="margin-bottom:20px">{{ article.published_at | date: '%B %d, %Y' }}{% if article.author %} · {{ article.author }}{% endif %}</p>
+  {% if article.image %}<img src="{{ article.image | image_url: width: 1000 }}" alt="{{ article.title | escape }}" style="border-radius:14px;margin-bottom:24px">{% endif %}
+  <div class="rte" style="line-height:1.75">{{ article.content }}</div>
+</article>
